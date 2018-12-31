@@ -6,13 +6,14 @@ function fish_prompt
   if not set -q __fish_prompt_hostname
     set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
   end
-  if not set -q __fish_prompt_char
-    switch (id -u)
-      case 0
-	set -g __fish_prompt_char '#'
-      case '*'
-	set -g __fish_prompt_char 'λ'
-    end
+
+  switch (id -u)
+    case 0
+      set -g __fish_prompt_char '#'
+      set -g user_color (set_color red)
+    case '*'
+      set -g __fish_prompt_char '$'
+      set -g user_color (set_color blue)
   end
 
 
@@ -37,8 +38,9 @@ function fish_prompt
   set -g __fish_git_prompt_showstashstate true
   set -g __fish_git_prompt_show_informative_status true 
  
+  set pwd1 (dirs | tr -d '\n')
   # Line 1
-  echo -n $white'╭─'$hotpink$USER$white' at '$orange$__fish_prompt_hostname$white' in '$limegreen(pwd)$turquoise
+  echo -n $white'╭─'$user_color$USER$white' at '$orange$__fish_prompt_hostname$white' in '$limegreen$pwd1$turquoise
   __fish_git_prompt " (%s)"
   echo
 
