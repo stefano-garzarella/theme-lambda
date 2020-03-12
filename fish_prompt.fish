@@ -41,7 +41,7 @@ function fish_prompt
   set -l current_user (whoami)
 
   # Line 1
-  echo -n $white'╭─'$user_color$current_user$white' at '$orange$__fish_prompt_hostname$white' in '$limegreen(pwd|sed "s=$HOME=⌁=")$turquoise
+  echo -n $white'╭─'$user_color$current_user$white'@'$orange$__fish_prompt_hostname$white':'$limegreen(pwd|sed "s=$HOME=~=")$turquoise
   __fish_git_prompt " (%s)"
   echo
 
