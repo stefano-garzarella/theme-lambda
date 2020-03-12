@@ -37,10 +37,11 @@ function fish_prompt
   set -g __fish_git_prompt_showuntrackedfiles true
   set -g __fish_git_prompt_showstashstate true
   set -g __fish_git_prompt_show_informative_status true 
- 
-  set pwd1 (dirs | tr -d '\n')
+
+  set -l current_user (whoami)
+
   # Line 1
-  echo -n $white'╭─'$user_color$USER$white' at '$orange$__fish_prompt_hostname$white' in '$limegreen$pwd1$turquoise
+  echo -n $white'╭─'$user_color$current_user$white' at '$orange$__fish_prompt_hostname$white' in '$limegreen(pwd|sed "s=$HOME=⌁=")$turquoise
   __fish_git_prompt " (%s)"
   echo
 
